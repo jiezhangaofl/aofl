@@ -34,7 +34,9 @@ jobs:
           npm install
 
       - name: Run lint
-        run: npm run lint
+        run: |
+          cd aofl-js-packages
+          npm run lint
 
   unit-test:
     runs-on: ubuntu-latest
@@ -61,4 +63,6 @@ jobs:
           npm install
 
       - name: Run tests
-        run: npm test -- --debug
+        run: |
+          cd aofl-js-packages
+          npm test -- --debug
