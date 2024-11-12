@@ -70,4 +70,5 @@ jobs:
 
       - name: Display test results
         # if: failure()
-        run: cat aofl-js-packages/logs/unit-test
+        run: |
+          find aofl-js-packages/logs/unit-test -type f -exec cat {} +
