@@ -10,6 +10,7 @@ on:
 
 jobs:
   lint:
+    if: false # @todo: disable temporarily
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

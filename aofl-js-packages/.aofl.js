@@ -106,7 +106,7 @@ module.exports = {
   },
   unitTesting: {
     root: __dirname,
-    host: process.env.TRAVIS? 'travis': 'lh',
+    host: process.env.TRAVIS? 'travis': 'localhost',
     port: 3035,
     suites: {
       'form-validate': [
