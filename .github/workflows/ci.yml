@@ -60,12 +60,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openjdk-11-jre-headless
           wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.0.0/selenium-server-4.0.0.jar -O selenium-server.jar
-          sudo java -jar selenium-server.jar standalone --host 127.0.0.1 --port 443 &
+          java -jar selenium-server.jar standalone --host 127.0.0.1 --port 4444 &
         shell: bash
 
       - name: Wait for Selenium to start
         run: |
-          until curl -s http://127.0.0.1:443/wd/hub/status | grep '"ready":true' > /dev/null; do
+          until curl -s http://127.0.0.1:4444/wd/hub/status | grep '"ready":true' > /dev/null; do
             echo "Waiting for Selenium..."
             sleep 2
           done

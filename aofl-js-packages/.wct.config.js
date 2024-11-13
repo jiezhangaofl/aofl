@@ -1,4 +1,7 @@
 const config = {
+  hostname: '127.0.0.1',  // Use localhost for consistency with Selenium server
+  port: 4444,             // Match the Selenium server port
+  path: '/wd/hub',        // Standard path for Selenium
   capabilities: [
     {
       "maxInstances": 5,
