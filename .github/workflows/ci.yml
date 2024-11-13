@@ -50,18 +50,25 @@ jobs:
         with:
           node-version: 18
 
-      - name: Cache npm
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
       - name: Install dependencies
         run: |
           cd aofl-js-packages
           npm install
+
+      - name: Start Selenium Server
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-11-jre-headless
+          wget https://selenium-release.storage.googleapis.com/4.0/selenium-server-4.0.0.jar
+          sudo java -jar selenium-server-4.0.0.jar standalone --host 127.0.0.1 --port 443 &
+        shell: bash
+
+      - name: Wait for Selenium to start
+        run: |
+          until curl -s http://127.0.0.1:443/wd/hub/status | grep '"ready":true' > /dev/null; do
+            echo "Waiting for Selenium..."
+            sleep 2
+          done
 
       - name: Run tests
         run: |
